@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Kalvi</title>
+  <style>
+    body{font-family:system-ui,Arial;padding:24px;max-width:800px;margin:auto;line-height:1.6}
+    .card{border:1px solid #ddd;border-radius:12px;padding:16px}
+    button{padding:8px 14px;border-radius:8px;border:1px solid #ccc;cursor:pointer}
+  </style>
+</head>
+<body>
+  <h1>Kalvi</h1>
+  <p>Free, lightweight practice—like Brilliant, no login needed.</p>
+
+  <div class="card">
+    <h3>Quick Check</h3>
+    <p>What is 7 × 8?</p>
+    <input id="ans" placeholder="Your answer"/>
+    <button onclick="check()">Check</button>
+    <p id="msg"></p>
+  </div>
+
+  <script>
+    function check(){
+      const v = document.getElementById('ans').value.trim();
+      document.getElementById('msg').textContent = (v==='56') ? '✅ Correct!' : '❌ Try again';
+    }
+  </script>
+</body>
+</html>
