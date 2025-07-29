@@ -1,0 +1,26 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>QA 1 — Multiplication Basics</title>
+<style>body{font-family:system-ui,Arial;max-width:820px;margin:auto;padding:24px;line-height:1.6}
+.card{border:1px solid #ddd;border-radius:14px;padding:16px} button{padding:8px 12px;border-radius:10px;border:1px solid #aaa;cursor:pointer}</style>
+</head>
+<body>
+<h2>QA • Lesson 1: Quick Multiply</h2>
+<p>Warm‑up. Compute: <b>12 × 15</b></p>
+<div class="card">
+  <input id="ans" placeholder="Your answer">
+  <button onclick="check()">Check</button>
+  <p id="msg"></p>
+</div>
+<p><a href="../../">← Back to Dashboard</a></p>
+<script>
+  const TRACK='qa', THIS=1, TOTAL=12;
+  function saveProgress(n){ localStorage.setItem('prog_'+TRACK, String(Math.max(n, +localStorage.getItem('prog_'+TRACK)||0))); }
+  function next(){ location.href = THIS>=TOTAL ? '../../' : `./${THIS+1}.html`; }
+  function check(){
+    const ok = (document.getElementById('ans').value.trim()==='180');
+    msg.textContent = ok ? '✅ Correct! Using (a+b)(a+5) trick can help.' : '❌ Try again';
+    if(ok){ saveProgress(THIS); setTimeout(next, 700); }
+  }
+</script>
+</body></html>
