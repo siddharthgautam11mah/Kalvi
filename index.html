@@ -3,30 +3,78 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>Kalvi</title>
-  <style>
-    body{font-family:system-ui,Arial;padding:24px;max-width:800px;margin:auto;line-height:1.6}
-    .card{border:1px solid #ddd;border-radius:12px;padding:16px}
-    button{padding:8px 14px;border-radius:8px;border:1px solid #ccc;cursor:pointer}
-  </style>
+  <title>Kalvi — CAT Prep</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="manifest" href="manifest.webmanifest">
 </head>
 <body>
-  <h1>Kalvi</h1>
-  <p>Free, lightweight practice—like Brilliant, no login needed.</p>
-
-  <div class="card">
-    <h3>Quick Check</h3>
-    <p>What is 7 × 8?</p>
-    <input id="ans" placeholder="Your answer"/>
-    <button onclick="check()">Check</button>
-    <p id="msg"></p>
+<header class="top">
+  <h1>Kalvi — CAT 2025</h1>
+  <div class="top-right">
+    <button id="themeBtn" title="Toggle theme">🌓</button>
+    <button id="installBtn" hidden>⬇️ Install</button>
   </div>
+</header>
 
-  <script>
-    function check(){
-      const v = document.getElementById('ans').value.trim();
-      document.getElementById('msg').textContent = (v==='56') ? '✅ Correct!' : '❌ Try again';
-    }
-  </script>
+<main class="wrap">
+  <section class="row kpis">
+    <div class="kpi"><div id="streak" class="big">0🔥</div><div class="small">Day streak</div></div>
+    <div class="kpi"><div id="xp" class="big">0 XP</div><div class="small">Total XP</div></div>
+    <div class="kpi"><div id="acc" class="big">–%</div><div class="small">7‑day accuracy</div></div>
+    <div class="kpi"><div id="goal" class="big">0/20</div><div class="small">Today’s goal</div></div>
+  </section>
+
+  <section class="grid">
+    <article class="card">
+      <span class="badge">QA — Quantitative Ability</span>
+      <h3>Arithmetic • Algebra • Geometry • Number Systems</h3>
+      <div class="progress"><div class="bar qa" id="bar-qa"></div></div>
+      <div class="row">
+        <small id="txt-qa" class="muted">0%</small>
+        <button onclick="start('qa')">Start / Resume</button>
+      </div>
+    </article>
+
+    <article class="card">
+      <span class="badge">VARC — Verbal Ability & RC</span>
+      <h3>RC • Para Jumbles • Summary • Grammar</h3>
+      <div class="progress"><div class="bar varc" id="bar-varc"></div></div>
+      <div class="row">
+        <small id="txt-varc" class="muted">0%</small>
+        <button onclick="start('varc')">Start / Resume</button>
+      </div>
+    </article>
+
+    <article class="card">
+      <span class="badge">DILR — Data Interpretation & LR</span>
+      <h3>Tables • Charts • Venn • Puzzles</h3>
+      <div class="progress"><div class="bar dilr" id="bar-dilr"></div></div>
+      <div class="row">
+        <small id="txt-dilr" class="muted">0%</small>
+        <button onclick="start('dilr')">Start / Resume</button>
+      </div>
+    </article>
+  </section>
+
+  <section class="row tools">
+    <button onclick="exportProgress()">⬇️ Export Progress</button>
+    <label class="import">⬆️ Import<input type="file" accept="application/json" onchange="importProgress(this)"></label>
+    <button onclick="resetAll()">♻️ Reset</button>
+  </section>
+
+  <section class="card">
+    <h3>Estimator (practice‑only)</h3>
+    <p>Your recent accuracy × volume projects a practice score band.</p>
+    <div id="est">—</div>
+  </section>
+</main>
+
+<footer class="footer">No login • Works offline • Privacy‑friendly</footer>
+
+<script src="app.js"></script>
+<script>
+  // Register service worker
+  if ('serviceWorker' in navigator) navigator.serviceWorker.register('/service-worker.js');
+</script>
 </body>
 </html>
